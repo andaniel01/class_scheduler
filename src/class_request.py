@@ -30,9 +30,13 @@ class ClassRequest:
         elif not isinstance(self.session, str):
             return True
 
-        # date check
+        # date check and past date check
         if not isinstance(self.date, datetime.datetime):
             return True
+        else:
+            if self.date.date() < datetime.date.today():
+                return True
+
         # start time check
         if not isinstance(self.start_time, datetime.time):
             return True
@@ -40,14 +44,13 @@ class ClassRequest:
         return False
 
     def __str__(self):
-        string = "---------------------------------- \n" \
-                 "Student Name: {0} \n" \
+        string = "Student Name: {0} \n" \
                  "Course Name:  {1} \n" \
                  "Session:      {2} \n" \
                  "Date:         {3} \n" \
                  "Start Time:   {4} \n" \
                  "End Time:     {5} \n" \
-                 "Note:         {6} \n" \
-                 "----------------------------------"
+                 "Note:         {6} \n"
+
         return string.format(self.student_name, self.course_name, self.session, self.date, self.start_time,
                              self.end_time, self.note)

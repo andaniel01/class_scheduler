@@ -26,7 +26,7 @@ class ExcelReader:
         return dict
 
     def read_single_excel(self, excel_path):
-        excel_path = '../test_datas/iData Replay Application Form.xlsx'
+        excel_path = '../test_datas/iData Replay Application Form-4.xlsx'
         excel_data = pd.read_excel(excel_path, header=2)
         print(excel_data)
         return excel_data
