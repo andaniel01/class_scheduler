@@ -13,6 +13,48 @@ class ClassRequest:
         self.end_time = end_time
         self.note = note
 
+    def get_student_name(self):
+        return self.student_name
+
+    def set_student_name(self,student_name):
+        self.student_name = student_name
+
+    def get_course_name(self):
+        return self.course_name
+
+    def set_course_name(self,course_name):
+        self.course_name = course_name
+
+    def get_session(self):
+        return self.session
+
+    def set_session(self, session):
+        self.session = session
+
+    def get_date(self):
+        return self.date
+
+    def set_date(self, date):
+        self.date = date
+
+    def get_start_time(self):
+        return self.start_time
+
+    def set_start_time(self, start_time):
+        self.start_time = start_time
+
+    def get_end_time(self):
+        return self.end_time
+
+    def set_end_time(self, end_time):
+        self.end_time = end_time
+
+    def get_note(self):
+        return self.note
+
+    def set_note(self, note):
+        self.note = note
+
     def is_invalid_request(self):
 
         # check student name
