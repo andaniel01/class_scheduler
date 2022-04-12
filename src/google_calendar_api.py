@@ -12,6 +12,7 @@ from googleapiclient.errors import HttpError
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
+
 def creds_generator():
     creds = None
     if os.path.exists('../resources/token.json'):
@@ -29,8 +30,8 @@ def creds_generator():
             token.write(creds.to_json())
     return creds
 
-def create_new_event(list_events):
 
+def post_new_event(list_events):
     for event in list_events:
         try:
             service = build('calendar', 'v3', credentials=creds_generator())
@@ -40,16 +41,20 @@ def create_new_event(list_events):
             print('An error occurred: %s' % error)
 
 
-def get_10_events():
-
+def get_today_events(date):
     try:
         service = build('calendar', 'v3', credentials=creds_generator())
 
         # Call the Calendar API
-        now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
+        # now = datetime.datetime.utcnow().isoformat() # 'Z' indicates UTC time
+        time_min = date.to_pydatetime().isoformat() + "-04:00"
+        max_time = (date.to_pydatetime() + datetime.timedelta(hours=23,minutes=59,seconds=59)).isoformat() + "-04:00"
+
+        print(time_min)
+        print(time_min)
         print('Getting the upcoming 10 events')
-        events_result = service.events().list(calendarId='primary', timeMin=now,
-                                              maxResults=10, singleEvents=True,
+        events_result = service.events().list(calendarId='primary', timeMin=time_min,
+                                              timeMax=max_time, singleEvents=True,
                                               orderBy='startTime').execute()
         events = events_result.get('items', [])
         print(events_result)
@@ -67,5 +72,4 @@ def get_10_events():
 
 
 if __name__ == '__main__':
-    create_new_event()
-    get_10_events()
+    get_today_events()
